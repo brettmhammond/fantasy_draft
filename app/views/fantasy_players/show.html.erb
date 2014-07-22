@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fantasy league:</strong>
+  <%= @fantasy_player.fantasy_league %>
+</p>
+
+<p>
+  <strong>Fantasy team:</strong>
+  <%= @fantasy_player.fantasy_team %>
+</p>
+
+<p>
+  <strong>Fantasy draft:</strong>
+  <%= @fantasy_player.fantasy_draft %>
+</p>
+
+<p>
+  <strong>Player:</strong>
+  <%= @fantasy_player.player %>
+</p>
+
+<%= link_to 'Edit', edit_fantasy_player_path(@fantasy_player) %> |
+<%= link_to 'Back', fantasy_players_path %>

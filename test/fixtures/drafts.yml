@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fantasy_league_id: 
+  fantasy_draft_style_id: 
+  player_id: 
+  max_amount: 1
+  rounds: 1
+
+two:
+  fantasy_league_id: 
+  fantasy_draft_style_id: 
+  player_id: 
+  max_amount: 1
+  rounds: 1

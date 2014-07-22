@@ -1,0 +1,2 @@
+module PlayerAuctionValuesHelper
+end

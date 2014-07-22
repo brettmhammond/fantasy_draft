@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fantasy_league_id: 
+  fantasy_team_id: 
+  fantasy_draft_id: 
+  player_id: 
+
+two:
+  fantasy_league_id: 
+  fantasy_team_id: 
+  fantasy_draft_id: 
+  player_id: 

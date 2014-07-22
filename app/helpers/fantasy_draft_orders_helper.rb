@@ -1,0 +1,2 @@
+module FantasyDraftOrdersHelper
+end

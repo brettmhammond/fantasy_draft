@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Player:</strong>
+  <%= @player_auction_value.player %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @player_auction_value.year %>
+</p>
+
+<p>
+  <strong>Min price:</strong>
+  <%= @player_auction_value.min_price %>
+</p>
+
+<p>
+  <strong>Max price:</strong>
+  <%= @player_auction_value.max_price %>
+</p>
+
+<p>
+  <strong>Avg price:</strong>
+  <%= @player_auction_value.avg_price %>
+</p>
+
+<%= link_to 'Edit', edit_player_auction_value_path(@player_auction_value) %> |
+<%= link_to 'Back', player_auction_values_path %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @fantasy_league.name %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @fantasy_league.password %>
+</p>
+
+<%= link_to 'Edit', edit_fantasy_league_path(@fantasy_league) %> |
+<%= link_to 'Back', fantasy_leagues_path %>

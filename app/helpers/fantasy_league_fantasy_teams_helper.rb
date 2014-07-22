@@ -1,0 +1,2 @@
+module FantasyLeagueFantasyTeamsHelper
+end

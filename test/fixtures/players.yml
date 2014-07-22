@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  league_id: 
+  team_id: 
+  position_id: 
+  ffn_player_id: 1
+  college: MyString
+  first_name: MyString
+  last_name: MyString
+  name: MyString
+  height: MyString
+  weight: MyString
+  uniform_number: MyString
+  date_of_birth: MyString
+  active: false
+
+two:
+  league_id: 
+  team_id: 
+  position_id: 
+  ffn_player_id: 1
+  college: MyString
+  first_name: MyString
+  last_name: MyString
+  name: MyString
+  height: MyString
+  weight: MyString
+  uniform_number: MyString
+  date_of_birth: MyString
+  active: false

@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Player:</strong>
+  <%= @player_projection.player %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @player_projection.year %>
+</p>
+
+<p>
+  <strong>Fantasy points:</strong>
+  <%= @player_projection.fantasy_points %>
+</p>
+
+<p>
+  <strong>Completions:</strong>
+  <%= @player_projection.completions %>
+</p>
+
+<p>
+  <strong>Attempts:</strong>
+  <%= @player_projection.attempts %>
+</p>
+
+<p>
+  <strong>Pass yards:</strong>
+  <%= @player_projection.pass_yards %>
+</p>
+
+<p>
+  <strong>Pass tds:</strong>
+  <%= @player_projection.pass_tds %>
+</p>
+
+<p>
+  <strong>Pass ints:</strong>
+  <%= @player_projection.pass_ints %>
+</p>
+
+<p>
+  <strong>Rush yards:</strong>
+  <%= @player_projection.rush_yards %>
+</p>
+
+<p>
+  <strong>Rush tds:</strong>
+  <%= @player_projection.rush_tds %>
+</p>
+
+<%= link_to 'Edit', edit_player_projection_path(@player_projection) %> |
+<%= link_to 'Back', player_projections_path %>

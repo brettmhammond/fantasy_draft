@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fantasy league:</strong>
+  <%= @fantasy_draft_order.fantasy_league %>
+</p>
+
+<p>
+  <strong>Fantasy team:</strong>
+  <%= @fantasy_draft_order.fantasy_team %>
+</p>
+
+<p>
+  <strong>Fantasy draft:</strong>
+  <%= @fantasy_draft_order.fantasy_draft %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @fantasy_draft_order.position %>
+</p>
+
+<%= link_to 'Edit', edit_fantasy_draft_order_path(@fantasy_draft_order) %> |
+<%= link_to 'Back', fantasy_draft_orders_path %>

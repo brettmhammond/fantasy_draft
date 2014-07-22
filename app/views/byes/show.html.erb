@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @bye.team %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @bye.year %>
+</p>
+
+<p>
+  <strong>Week:</strong>
+  <%= @bye.week %>
+</p>
+
+<%= link_to 'Edit', edit_bye_path(@bye) %> |
+<%= link_to 'Back', byes_path %>

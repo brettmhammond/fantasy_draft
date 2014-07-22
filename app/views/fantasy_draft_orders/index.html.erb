@@ -1,0 +1,31 @@
+<h1>Listing fantasy_draft_orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fantasy league</th>
+      <th>Fantasy team</th>
+      <th>Fantasy draft</th>
+      <th>Position</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fantasy_draft_orders.each do |fantasy_draft_order| %>
+      <tr>
+        <td><%= fantasy_draft_order.fantasy_league %></td>
+        <td><%= fantasy_draft_order.fantasy_team %></td>
+        <td><%= fantasy_draft_order.fantasy_draft %></td>
+        <td><%= fantasy_draft_order.position %></td>
+        <td><%= link_to 'Show', fantasy_draft_order %></td>
+        <td><%= link_to 'Edit', edit_fantasy_draft_order_path(fantasy_draft_order) %></td>
+        <td><%= link_to 'Destroy', fantasy_draft_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fantasy draft order', new_fantasy_draft_order_path %>

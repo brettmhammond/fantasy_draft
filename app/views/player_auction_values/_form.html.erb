@@ -1,0 +1,37 @@
+<%= form_for(@player_auction_value) do |f| %>
+  <% if @player_auction_value.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@player_auction_value.errors.count, "error") %> prohibited this player_auction_value from being saved:</h2>
+
+      <ul>
+      <% @player_auction_value.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :player_id %><br>
+    <%= f.text_field :player_id %>
+  </div>
+  <div class="field">
+    <%= f.label :year %><br>
+    <%= f.number_field :year %>
+  </div>
+  <div class="field">
+    <%= f.label :min_price %><br>
+    <%= f.number_field :min_price %>
+  </div>
+  <div class="field">
+    <%= f.label :max_price %><br>
+    <%= f.number_field :max_price %>
+  </div>
+  <div class="field">
+    <%= f.label :avg_price %><br>
+    <%= f.number_field :avg_price %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

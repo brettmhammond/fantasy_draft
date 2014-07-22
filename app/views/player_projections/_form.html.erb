@@ -1,0 +1,57 @@
+<%= form_for(@player_projection) do |f| %>
+  <% if @player_projection.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@player_projection.errors.count, "error") %> prohibited this player_projection from being saved:</h2>
+
+      <ul>
+      <% @player_projection.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :player_id %><br>
+    <%= f.text_field :player_id %>
+  </div>
+  <div class="field">
+    <%= f.label :year %><br>
+    <%= f.number_field :year %>
+  </div>
+  <div class="field">
+    <%= f.label :fantasy_points %><br>
+    <%= f.number_field :fantasy_points %>
+  </div>
+  <div class="field">
+    <%= f.label :completions %><br>
+    <%= f.number_field :completions %>
+  </div>
+  <div class="field">
+    <%= f.label :attempts %><br>
+    <%= f.number_field :attempts %>
+  </div>
+  <div class="field">
+    <%= f.label :pass_yards %><br>
+    <%= f.number_field :pass_yards %>
+  </div>
+  <div class="field">
+    <%= f.label :pass_tds %><br>
+    <%= f.number_field :pass_tds %>
+  </div>
+  <div class="field">
+    <%= f.label :pass_ints %><br>
+    <%= f.number_field :pass_ints %>
+  </div>
+  <div class="field">
+    <%= f.label :rush_yards %><br>
+    <%= f.number_field :rush_yards %>
+  </div>
+  <div class="field">
+    <%= f.label :rush_tds %><br>
+    <%= f.number_field :rush_tds %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

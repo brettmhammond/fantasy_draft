@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ffn game:</strong>
+  <%= @schedule.ffn_game_id %>
+</p>
+
+<p>
+  <strong>Away team:</strong>
+  <%= @schedule.away_team %>
+</p>
+
+<p>
+  <strong>Home team:</strong>
+  <%= @schedule.home_team %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @schedule.year %>
+</p>
+
+<p>
+  <strong>Week:</strong>
+  <%= @schedule.week %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @schedule.date %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @schedule.time %>
+</p>
+
+<p>
+  <strong>Broadcaster:</strong>
+  <%= @schedule.broadcaster %>
+</p>
+
+<%= link_to 'Edit', edit_schedule_path(@schedule) %> |
+<%= link_to 'Back', schedules_path %>
