@@ -4,7 +4,7 @@ class ByesController < ApplicationController
   # GET /byes
   # GET /byes.json
   def index
-    @byes = Bye.all
+    @byes = Bye.includes(:team)
   end
 
   # GET /byes/1

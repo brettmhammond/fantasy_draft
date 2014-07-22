@@ -1,10 +1,9 @@
-<h1>Listing player_projections</h1>
+<h4>Player Projections</h4>
 
-<table>
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Player</th>
-      <th>Year</th>
       <th>Fantasy points</th>
       <th>Completions</th>
       <th>Attempts</th>
@@ -13,15 +12,16 @@
       <th>Pass ints</th>
       <th>Rush yards</th>
       <th>Rush tds</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @player_projections.each do |player_projection| %>
       <tr>
-        <td><%= player_projection.player %></td>
-        <td><%= player_projection.year %></td>
+        <td>
+          <%= image_tag("team_logos/#{player_projection.player.team.key}.png", width: "25", alt: player_projection.player.team.name)%>
+          <%= player_projection.player.name %> (<%= player_projection.player.position.name %>)
+        </td>
         <td><%= player_projection.fantasy_points %></td>
         <td><%= player_projection.completions %></td>
         <td><%= player_projection.attempts %></td>
@@ -30,14 +30,7 @@
         <td><%= player_projection.pass_ints %></td>
         <td><%= player_projection.rush_yards %></td>
         <td><%= player_projection.rush_tds %></td>
-        <td><%= link_to 'Show', player_projection %></td>
-        <td><%= link_to 'Edit', edit_player_projection_path(player_projection) %></td>
-        <td><%= link_to 'Destroy', player_projection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Player projection', new_player_projection_path %>

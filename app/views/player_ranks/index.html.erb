@@ -1,31 +1,50 @@
-<h1>Listing player_ranks</h1>
+<h4>Player Ranks</h4>
 
-<table>
+<%
+ if params[:position_id]
+  style='btn'
+ else
+  style='btn active'
+ end
+%>
+
+<div class="btn-group">
+  <a href="<%=player_ranks_path%>" class="<%=style%>">All</a>
+  <% Position.all.each do |position|
+     if params[:position_id] && params[:position_id].to_i == position.id
+      style='btn active'
+     else
+      style='btn'
+     end
+    %>
+
+
+      <%= link_to position.name, player_ranks_path(:position_id => position.id), :class => style %>
+  <% end %>
+</div>
+
+<div class="clearfix"></div>
+<br />
+
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Player</th>
-      <th>Year</th>
       <th>Position rank</th>
       <th>Overall rank</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @player_ranks.each do |player_rank| %>
       <tr>
-        <td><%= player_rank.player %></td>
-        <td><%= player_rank.year %></td>
+        <td>
+          <%= image_tag("team_logos/#{player_rank.player.team.key}.png", width: "25", alt: player_rank.player.team.name)%>
+          <%= player_rank.player.name %> (<%= player_rank.player.position.name %>)
+        </td>
         <td><%= player_rank.position_rank %></td>
         <td><%= player_rank.overall_rank %></td>
-        <td><%= link_to 'Show', player_rank %></td>
-        <td><%= link_to 'Edit', edit_player_rank_path(player_rank) %></td>
-        <td><%= link_to 'Destroy', player_rank, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Player rank', new_player_rank_path %>

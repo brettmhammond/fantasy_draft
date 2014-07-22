@@ -4,7 +4,7 @@ class PlayerAuctionValuesController < ApplicationController
   # GET /player_auction_values
   # GET /player_auction_values.json
   def index
-    @player_auction_values = PlayerAuctionValue.all
+    @player_auction_values = PlayerAuctionValue.includes(:player, :team, :position).order('max_price DESC')
   end
 
   # GET /player_auction_values/1

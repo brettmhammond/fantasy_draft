@@ -1,29 +1,18 @@
-<h1>Listing byes</h1>
-
-<table>
+<h4>Team Byes</h4>
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Team</th>
-      <th>Year</th>
       <th>Week</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @byes.each do |bye| %>
       <tr>
-        <td><%= bye.team %></td>
-        <td><%= bye.year %></td>
+        <td><%= image_tag("team_logos/#{bye.team.key}.png", width: "25", alt: bye.team.name)%> <%= bye.team.full_name %></td>
         <td><%= bye.week %></td>
-        <td><%= link_to 'Show', bye %></td>
-        <td><%= link_to 'Edit', edit_bye_path(bye) %></td>
-        <td><%= link_to 'Destroy', bye, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Bye', new_bye_path %>

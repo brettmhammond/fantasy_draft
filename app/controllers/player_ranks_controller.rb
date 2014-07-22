@@ -4,7 +4,11 @@ class PlayerRanksController < ApplicationController
   # GET /player_ranks
   # GET /player_ranks.json
   def index
-    @player_ranks = PlayerRank.all
+    if params[:position_id]
+      @player_ranks = PlayerRank.joins(:player, :team, :position).where('positions.id = ?', params[:position_id]).order('position_rank ASC')
+    else
+      @player_ranks = PlayerRank.includes(:player, :team, :position).order('overall_rank ASC')
+    end
   end
 
   # GET /player_ranks/1
@@ -69,6 +73,6 @@ class PlayerRanksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_rank_params
-      params.require(:player_rank).permit(:player_id, :year, :position_rank, :overall_rank)
+      params.require(:player_rank).permit(:player_id, :year, :position_rank, :overall_rank, :position_id)
     end
 end

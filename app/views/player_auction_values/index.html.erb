@@ -1,33 +1,26 @@
-<h1>Listing player_auction_values</h1>
+<h4>Player Auction Values</h4>
 
-<table>
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Player</th>
-      <th>Year</th>
       <th>Min price</th>
       <th>Max price</th>
       <th>Avg price</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @player_auction_values.each do |player_auction_value| %>
       <tr>
-        <td><%= player_auction_value.player %></td>
-        <td><%= player_auction_value.year %></td>
+        <td>
+          <%= image_tag("team_logos/#{player_auction_value.player.team.key}.png", width: "25", alt: player_auction_value.player.team.name)%>
+          <%= player_auction_value.player.name %> (<%= player_auction_value.player.position.name %>)
+        </td>
         <td><%= player_auction_value.min_price %></td>
         <td><%= player_auction_value.max_price %></td>
         <td><%= player_auction_value.avg_price %></td>
-        <td><%= link_to 'Show', player_auction_value %></td>
-        <td><%= link_to 'Edit', edit_player_auction_value_path(player_auction_value) %></td>
-        <td><%= link_to 'Destroy', player_auction_value, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Player auction value', new_player_auction_value_path %>

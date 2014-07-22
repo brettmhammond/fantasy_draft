@@ -1,39 +1,31 @@
-<h1>Listing schedules</h1>
+<h4>Schedules</h4>
 
-<table>
+<table class="table table-bordered">
   <thead>
     <tr>
-      <th>Ffn game</th>
-      <th>Away team</th>
-      <th>Home team</th>
-      <th>Year</th>
       <th>Week</th>
+      <th>Away team</th>
+      <th></th>
+      <th></th>
+      <th>Home team</th>
       <th>Date</th>
-      <th>Time</th>
-      <th>Broadcaster</th>
-      <th colspan="3"></th>
+      <th>Station</th>
     </tr>
   </thead>
 
   <tbody>
     <% @schedules.each do |schedule| %>
       <tr>
-        <td><%= schedule.ffn_game_id %></td>
-        <td><%= schedule.away_team %></td>
-        <td><%= schedule.home_team %></td>
-        <td><%= schedule.year %></td>
         <td><%= schedule.week %></td>
-        <td><%= schedule.date %></td>
-        <td><%= schedule.time %></td>
+        <td><%= schedule.away_team.full_name %></td>
+        <td align="right">
+          <%= image_tag("team_logos/#{schedule.away_team.key}.png", width: "25", alt: schedule.away_team.name)%>
+        </td>
+        <td><%= image_tag("team_logos/#{schedule.home_team.key}.png", width: "25", alt: schedule.home_team.name)%></td>
+        <td><%= schedule.home_team.full_name %></td>
+        <td><%= schedule.date %> <%= schedule.time %></td>
         <td><%= schedule.broadcaster %></td>
-        <td><%= link_to 'Show', schedule %></td>
-        <td><%= link_to 'Edit', edit_schedule_path(schedule) %></td>
-        <td><%= link_to 'Destroy', schedule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Schedule', new_schedule_path %>

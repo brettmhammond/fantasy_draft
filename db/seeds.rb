@@ -529,6 +529,18 @@ player_auction_values.each do |player_auction_value|
 end
 puts "Player Auction Values have been seeded."
 
+FantasyDraftStyle.delete_all
+FantasyDraftStyle.create([
+    {
+        id: 1,
+        name: 'Auction'
+    },
+    {
+        id: 2,
+        name: 'Snake'
+    },
+])
+puts "Fantasy Draft Styles have been seeded."
 
 
 

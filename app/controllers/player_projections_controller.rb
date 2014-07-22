@@ -4,7 +4,7 @@ class PlayerProjectionsController < ApplicationController
   # GET /player_projections
   # GET /player_projections.json
   def index
-    @player_projections = PlayerProjection.all
+    @player_projections = PlayerProjection.includes(:player, :team, :position)
   end
 
   # GET /player_projections/1

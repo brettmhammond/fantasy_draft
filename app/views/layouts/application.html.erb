@@ -1,14 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>FantasyDraft</title>
+  <title>Fantasy Draft</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<div class="container-fluid">
+      <div class="masthead">
+        <h3>FantasyDraft</h3>
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="container">
+              <ul class="nav">
+                <li><%= link_to 'Teams', teams_path %></li>
+                <li><%= link_to 'Schedule', schedules_path %></li>
+                <li><%= link_to 'Byes', byes_path %></li>
+                <li><%= link_to 'Players', players_path %></li>
+                <li><%= link_to 'Positions', positions_path %></li>
+                <li><%= link_to 'Rankings', player_ranks_path %></li>
+                <li><%= link_to 'Projections', player_projections_path %></li>
+                <li><%= link_to 'Values', player_auction_values_path %></li>
+                <li><%= link_to 'Fantasy Leagues', fantasy_leagues_path %></li>
+                <li><%= link_to 'Fantasy Teams', fantasy_teams_path %></li>
+                <li><%= link_to 'Drafts', fantasy_drafts_path %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
 
+    <%= yield %>
+</div>
 </body>
 </html>

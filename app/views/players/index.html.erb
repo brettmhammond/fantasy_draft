@@ -1,42 +1,20 @@
-<h1>Listing players</h1>
+<h4>Players</h4>
 
-<table>
+<table class="table table-bordered">
   <thead>
     <tr>
-      <th>League</th>
-      <th>Team</th>
-      <th>Position</th>
-      <th>Ffn player</th>
-      <th>College</th>
-      <th>First name</th>
-      <th>Last name</th>
       <th>Name</th>
-      <th>Height</th>
-      <th>Weight</th>
-      <th>Uniform number</th>
-      <th>Date of birth</th>
-      <th>Active</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @players.each do |player| %>
       <tr>
-        <td><%= player.league %></td>
-        <td><%= player.team %></td>
-        <td><%= player.position %></td>
-        <td><%= player.ffn_player_id %></td>
-        <td><%= player.college %></td>
-        <td><%= player.first_name %></td>
-        <td><%= player.last_name %></td>
-        <td><%= player.name %></td>
-        <td><%= player.height %></td>
-        <td><%= player.weight %></td>
-        <td><%= player.uniform_number %></td>
-        <td><%= player.date_of_birth %></td>
-        <td><%= player.active %></td>
-        <td><%= link_to 'Show', player %></td>
+        <td>
+          <img src="http://www.fantasyfootballnerd.com/images/players/<%= player.ffn_player_id %>.jpg" width="50" alt="" />
+           <%= player.last_name %>, <%= player.first_name %> (<%= player.position.name %>) - <%= player.team.key %>
+        </td>
         <td><%= link_to 'Edit', edit_player_path(player) %></td>
         <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
