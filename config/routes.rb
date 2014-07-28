@@ -15,5 +15,12 @@ Rails.application.routes.draw do
   resources :teams
   resources :leagues
 
-  root 'players#index'
+  resources :fantasy_leagues do
+    resources :fantasy_drafts
+    resources :fantasy_teams do
+      resources :fantasy_players
+    end
+  end
+
+  root 'fantasy_leagues#index'
 end

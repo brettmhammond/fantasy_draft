@@ -1,5 +1,5 @@
 class FantasyLeaguesController < ApplicationController
-  before_action :set_fantasy_league, only: [:show, :edit, :update, :destroy]
+  before_action :set_fantasy_league, only: [:edit, :update, :destroy]
 
   # GET /fantasy_leagues
   # GET /fantasy_leagues.json
@@ -10,6 +10,7 @@ class FantasyLeaguesController < ApplicationController
   # GET /fantasy_leagues/1
   # GET /fantasy_leagues/1.json
   def show
+    @fantasy_league = FantasyLeague.includes(:fantasy_teams, :fantasy_drafts).find(params[:id])
   end
 
   # GET /fantasy_leagues/new

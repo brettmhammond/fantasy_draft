@@ -1,0 +1,20 @@
+<%= form_for([@fantasy_league, @fantasy_draft]) do |f| %>
+  <%= f.hidden_field :fantasy_league_id %>
+
+  <div class="field">
+    <%= f.label :fantasy_draft_style_id %><br>
+    <%= f.select :fantasy_draft_style_id, options_from_collection_for_select(FantasyDraftStyle.all, "id", "name", @fantasy_draft.fantasy_draft_style_id) %>
+
+  </div>
+  <div class="field">
+    <%= f.label :max_amount %><br>
+    <%= f.number_field :max_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :rounds %><br>
+    <%= f.number_field :rounds %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,14 +1,79 @@
-<p id="notice"><%= notice %></p>
+<h3>
+    <%= @fantasy_league.name %>
+    <small>
+        <%= link_to '[ League Settings ]', edit_fantasy_league_path(@fantasy_league), :class => 'btn-link' %>
+    </small>
+</h3>
+<hr />
 
-<p>
-  <strong>Name:</strong>
-  <%= @fantasy_league.name %>
-</p>
+<div class="row-fluid">
+    <div class="span6">
+        <div class="pull-right">
+            <%= link_to 'Add New Team', new_fantasy_league_fantasy_team_path(@fantasy_league), :class => 'btn' %>
+        </div>
+        <h4>Teams</h4>
+        <hr />
 
-<p>
-  <strong>Password:</strong>
-  <%= @fantasy_league.password %>
-</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="45%">Team</th>
+              <th width="">Team Owner</th>
+              <th width="25%"></th>
+            </tr>
+          </thead>
 
-<%= link_to 'Edit', edit_fantasy_league_path(@fantasy_league) %> |
-<%= link_to 'Back', fantasy_leagues_path %>
+          <tbody>
+            <% @fantasy_league.fantasy_teams.each do |fantasy_team| %>
+              <tr>
+                <td><%= fantasy_team.name %></td>
+                <td><%= fantasy_team.owner %></td>
+                <td>
+                    <%= link_to 'Edit', edit_fantasy_league_fantasy_team_path(@fantasy_league, fantasy_team), :class => 'btn btn-small' %>
+                    <%= link_to 'Delete', fantasy_league_fantasy_team_path(@fantasy_league, fantasy_team), :class => 'btn btn-small', method: :delete, data: { confirm: 'Are you sure?' } %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+    </div>
+    <div class="span6">
+        <div class="pull-right">
+            <%= link_to 'Add New Draft', new_fantasy_league_fantasy_draft_path(@fantasy_league), :class => 'btn' %>
+        </div>
+        <h4>Drafts</h4>
+        <hr />
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Style</th>
+              <th>Rounds</th>
+              <th>Max Amount</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @fantasy_league.fantasy_drafts.each do |fantasy_draft| %>
+              <tr>
+                <td><%= fantasy_draft.id %></td>
+                <td><%= fantasy_draft.fantasy_draft_style.name %> Draft</td>
+                <td><%= fantasy_draft.rounds %></td>
+                <td><%= fantasy_draft.max_amount %></td>
+                <td>
+                    <%= link_to 'GO TO DRAFT BOARD', edit_fantasy_league_fantasy_draft_path(@fantasy_league, fantasy_draft), :class => 'btn btn-small btn-danger btn-block' %>
+                </td>
+                <td>
+                    <%= link_to 'Edit', edit_fantasy_league_fantasy_draft_path(@fantasy_league, fantasy_draft), :class => 'btn btn-small' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+    </div>
+</div>

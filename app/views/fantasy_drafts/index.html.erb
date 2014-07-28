@@ -1,0 +1,33 @@
+<h1>Listing drafts</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Fantasy league</th>
+      <th>Fantasy draft style</th>
+      <th>Player</th>
+      <th>Max amount</th>
+      <th>Rounds</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @drafts.each do |draft| %>
+      <tr>
+        <td><%= draft.fantasy_league %></td>
+        <td><%= draft.fantasy_draft_style %></td>
+        <td><%= draft.player %></td>
+        <td><%= draft.max_amount %></td>
+        <td><%= draft.rounds %></td>
+        <td><%= link_to 'Show', fantasy_draft %></td>
+        <td><%= link_to 'Edit', edit_fantasy_draft_path(draft) %></td>
+        <td><%= link_to 'Destroy', fantasy_draft, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Draft', new_fantasy_draft_path %>

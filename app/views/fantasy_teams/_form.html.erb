@@ -1,16 +1,5 @@
-<%= form_for(@fantasy_team) do |f| %>
-  <% if @fantasy_team.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@fantasy_team.errors.count, "error") %> prohibited this fantasy_team from being saved:</h2>
-
-      <ul>
-      <% @fantasy_team.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_for([@fantasy_league, @fantasy_team]) do |f| %>
+  <%= f.hidden_field :fantasy_league_id %>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -19,11 +8,7 @@
     <%= f.label :owner %><br>
     <%= f.text_field :owner %>
   </div>
-  <div class="field">
-    <%= f.label :logo %><br>
-    <%= f.text_field :logo %>
-  </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => 'btn btn-primary' %>
   </div>
 <% end %>
