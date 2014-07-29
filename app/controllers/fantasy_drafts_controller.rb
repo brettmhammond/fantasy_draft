@@ -8,11 +8,6 @@ class FantasyDraftsController < ApplicationController
   end
 
   def manager
-        Pusher['test_channel'].trigger('my_event', {
-          message: 'hello world'
-        })
-
-
     @fantasy_league = FantasyLeague.includes(:fantasy_teams).find(params[:fantasy_league_id])
     @fantasy_draft = FantasyDraft.find(params[:fantasy_draft_id])
     @fantasy_players = FantasyPlayer.where(fantasy_draft_id: params[:fantasy_draft_id], fantasy_league_id: params[:fantasy_league_id]).order('id DESC')

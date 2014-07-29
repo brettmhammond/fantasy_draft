@@ -42,8 +42,11 @@
 
             <div id="draft_board">
                 <ul class="draft_board__round_column">
-                    <li>
-                        RD#
+                    <li style="border-bottom:none">
+                        &nbsp;
+                    </li>
+                    <li style="height:20px;">
+                        &nbsp;
                     </li>
                     <% @fantasy_draft.rounds.times do |round| round = round + 1 %>
                         <li>
@@ -52,23 +55,40 @@
                     <% end %>
                 </ul>
 
-                <% @fantasy_draft_orders.each do |fantasy_draft_order| %>
+                <%
+                    @fantasy_draft_orders.each do |fantasy_draft_order|
+                        fantasy_players = FantasyPlayer
+                                                .where(
+                                                    fantasy_draft_id: params[:id],
+                                                    fantasy_league_id: params[:fantasy_league_id],
+                                                    fantasy_team_id: fantasy_draft_order.fantasy_team.id
+                                                ).order('id DESC')
+
+                        team_rounds = @fantasy_draft.rounds.to_i - fantasy_players.size.to_i
+
+                        total_spent = 0;
+
+                        if fantasy_players.any?
+
+                            total_spent = 0;
+                            fantasy_players.each do |fantasy_player|
+                                total_spent += fantasy_player.price
+                            end
+                        end
+
+                        max_bid = @fantasy_draft.max_amount - total_spent - (@fantasy_draft.rounds - fantasy_players.size.to_i)
+
+
+                %>
                     <ul class="draft_board__column">
-                        <li>
+                        <li style="border-bottom:none">
                             <%=fantasy_draft_order.fantasy_team.name%>
                         </li>
+                        <li style="text-align:center; line-height: 15px; font-size:12px; height:20px; ">
+                            Max Bid: $<%=max_bid%>
+                        </li>
                         <%
-                            fantasy_players = FantasyPlayer
-                                                    .where(
-                                                        fantasy_draft_id: params[:id],
-                                                        fantasy_league_id: params[:fantasy_league_id],
-                                                        fantasy_team_id: fantasy_draft_order.fantasy_team.id
-                                                    ).order('id DESC')
-
-                            team_rounds = @fantasy_draft.rounds.to_i - fantasy_players.size.to_i
-
                             if fantasy_players.any?
-
                                 fantasy_players.each do |fantasy_player|
                         %>
                                     <li>
@@ -108,8 +128,6 @@
                     <div class="clearfix"></div>
                     <br />
                     <div class="otb_other_info clearfix">
-                        <div class="otb_stat">Average Auction Value: $<%= @fantasy_draft.player.player_auction_value.avg_price %></div>
-                        <div class="otb_stat">Projected Fantasy Points: <%= @fantasy_draft.player.player_projection.fantasy_points %></div>
                     </div>
                 <% else %>
                     Next Pick
