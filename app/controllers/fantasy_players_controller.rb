@@ -28,7 +28,16 @@ class FantasyPlayersController < ApplicationController
 
     respond_to do |format|
       if @fantasy_player.save
-        format.html { redirect_to @fantasy_player, notice: 'Fantasy player was successfully created.' }
+
+        # Pusher['test_channel'].trigger('my_event', {
+        #   message: 'hello world'
+        # })
+
+        fantasy_draft = FantasyDraft.find(@fantasy_player.fantasy_draft_id)
+        fantasy_draft.player_id = nil
+        fantasy_draft.save
+
+        format.html { redirect_to fantasy_league_fantasy_draft_manager_path(@fantasy_player.fantasy_league_id, @fantasy_player.fantasy_draft_id), notice: 'Fantasy player was successfully created.' }
         format.json { render :show, status: :created, location: @fantasy_player }
       else
         format.html { render :new }
@@ -42,7 +51,7 @@ class FantasyPlayersController < ApplicationController
   def update
     respond_to do |format|
       if @fantasy_player.update(fantasy_player_params)
-        format.html { redirect_to @fantasy_player, notice: 'Fantasy player was successfully updated.' }
+        format.html { redirect_to fantasy_league_fantasy_draft_manager_path(@fantasy_player.fantasy_league_id, @fantasy_player.fantasy_draft_id), notice: 'Fantasy player was successfully updated.' }
         format.json { render :show, status: :ok, location: @fantasy_player }
       else
         format.html { render :edit }
@@ -56,7 +65,7 @@ class FantasyPlayersController < ApplicationController
   def destroy
     @fantasy_player.destroy
     respond_to do |format|
-      format.html { redirect_to fantasy_players_url, notice: 'Fantasy player was successfully destroyed.' }
+      format.html { redirect_to fantasy_league_fantasy_draft_manager_path(@fantasy_player.fantasy_league_id, @fantasy_player.fantasy_draft_id), notice: 'Fantasy player was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +78,6 @@ class FantasyPlayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fantasy_player_params
-      params.require(:fantasy_player).permit(:fantasy_league_id, :fantasy_team_id, :fantasy_draft_id, :player_id)
+      params.require(:fantasy_player).permit(:fantasy_league_id, :fantasy_team_id, :fantasy_draft_id, :player_id, :price)
     end
 end

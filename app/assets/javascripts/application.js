@@ -12,5 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require select2
 //= require turbolinks
 //= require_tree .
+
+
+
+$(document).ready(function() {
+    $(".select2").select2();
+    $(".player_select2").select2({
+        placeholder: "Select a Player"
+    });
+});

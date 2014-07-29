@@ -1,5 +1,5 @@
 class FantasyDraftsController < ApplicationController
-  before_action :set_fantasy_draft, only: [:show, :edit, :update, :destroy]
+  before_action :set_fantasy_draft, only: [:edit, :update, :destroy]
 
   # GET /drafts
   # GET /drafts.json
@@ -7,9 +7,43 @@ class FantasyDraftsController < ApplicationController
     @fantasy_drafts = FantasyDraft.all
   end
 
+  def manager
+        Pusher['test_channel'].trigger('my_event', {
+          message: 'hello world'
+        })
+
+
+    @fantasy_league = FantasyLeague.includes(:fantasy_teams).find(params[:fantasy_league_id])
+    @fantasy_draft = FantasyDraft.find(params[:fantasy_draft_id])
+    @fantasy_players = FantasyPlayer.where(fantasy_draft_id: params[:fantasy_draft_id], fantasy_league_id: params[:fantasy_league_id]).order('id DESC')
+
+    if @fantasy_players.any?
+      @players = Player.all.order('name').where('id not in (?)', @fantasy_players.map(&:player_id)).includes(:position, :team).map { |player| ["#{player.name} (#{player.position.name}) - #{player.team.key} ",player.id]}
+    else
+      @players = Player.all.order('name').includes(:position, :team).map { |player| ["#{player.name} (#{player.position.name}) - #{player.team.key} ",player.id]}
+    end
+
+    @fantasy_player = FantasyPlayer.new(:fantasy_league_id => params[:fantasy_league_id], :fantasy_draft_id => params[:fantasy_draft_id])
+
+  end
+
   # GET /drafts/1
   # GET /drafts/1.json
   def show
+    @fantasy_league = FantasyLeague.includes(:fantasy_teams).find(params[:fantasy_league_id])
+    @fantasy_draft = FantasyDraft.find(params[:id])
+    @fantasy_draft_orders = FantasyDraftOrder.where(fantasy_league_id: params[:fantasy_league_id], fantasy_draft_id: params[:id]).order('position ASC')
+    @fantasy_players = FantasyPlayer.where(fantasy_draft_id: params[:id], fantasy_league_id: params[:fantasy_league_id]).order('id DESC')
+
+    # raise @fantasy_draft_orders.to_yaml
+
+
+
+
+
+
+
+    render layout: "draft_board"
   end
 
   # GET /drafts/new
@@ -44,7 +78,13 @@ class FantasyDraftsController < ApplicationController
   def update
     respond_to do |format|
       if @fantasy_draft.update(fantasy_draft_params)
-        format.html { redirect_to fantasy_league_url(@fantasy_draft.fantasy_league_id), notice: 'Draft was successfully updated.' }
+
+        if params[:fantasy_draft][:redirect_to].to_s == 'manager'
+          format.html { redirect_to fantasy_league_fantasy_draft_manager_path(@fantasy_draft.fantasy_league_id, @fantasy_draft), notice: 'Draft was successfully updated.' }
+        else
+          format.html { redirect_to fantasy_league_url(@fantasy_draft.fantasy_league_id), notice: 'Draft was successfully updated.' }
+        end
+
         format.json { render :show, status: :ok, location: @fantasy_draft }
       else
         format.html { render :edit }

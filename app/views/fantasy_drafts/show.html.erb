@@ -1,29 +1,144 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
 
-<p>
-  <strong>Fantasy league:</strong>
-  <%= @draft.fantasy_league %>
-</p>
+    <div class="row-fluid">
+        <div class="span12">
+            <div id="board_logo">
+                <%= image_tag("nfl_logo.png")%>
+            </div>
+            <div id="board_name">
+                Fantasy Draft Auctioneer
+            </div>
+        </div>
+    </div>
 
-<p>
-  <strong>Fantasy draft style:</strong>
-  <%= @draft.fantasy_draft_style %>
-</p>
+    <div class="row-fluid">
+        <div class="span12 draft_board_league_row">
+            <div class="draft_board_league_name">
+                <%=@fantasy_league.name%>
+            </div>
+        </div>
+    </div>
 
-<p>
-  <strong>Player:</strong>
-  <%= @draft.player %>
-</p>
 
-<p>
-  <strong>Max amount:</strong>
-  <%= @draft.max_amount %>
-</p>
+    <div class="row-fluid">
+        <div class="span12">
+            <ul class="draft_order">
+                <% @fantasy_draft.rounds.times do |round|%>
+                    <li class="draft_order__round_slot">
+                        Round: <%= round + 1 %>
+                    </li>
+                    <% @fantasy_draft_orders.each do |fantasy_draft_order| %>
+                        <li class="draft_order__slot">
+                            <%= fantasy_draft_order.fantasy_team.name %>
+                        </li>
+                    <% end %>
+                <% end %>
+            </ul>
+        </div>
+    </div>
 
-<p>
-  <strong>Rounds:</strong>
-  <%= @draft.rounds %>
-</p>
+    <div class="row-fluid">
+        <div class="span10">
 
-<%= link_to 'Edit', edit_draft_path(@draft) %> |
-<%= link_to 'Back', drafts_path %>
+            <div id="draft_board">
+                <ul class="draft_board__round_column">
+                    <li>
+                        RD#
+                    </li>
+                    <% @fantasy_draft.rounds.times do |round| round = round + 1 %>
+                        <li>
+                            <%=round%>
+                        </li>
+                    <% end %>
+                </ul>
+
+                <% @fantasy_draft_orders.each do |fantasy_draft_order| %>
+                    <ul class="draft_board__column">
+                        <li>
+                            <%=fantasy_draft_order.fantasy_team.name%>
+                        </li>
+                        <%
+                            fantasy_players = FantasyPlayer
+                                                    .where(
+                                                        fantasy_draft_id: params[:id],
+                                                        fantasy_league_id: params[:fantasy_league_id],
+                                                        fantasy_team_id: fantasy_draft_order.fantasy_team.id
+                                                    ).order('id DESC')
+
+                            team_rounds = @fantasy_draft.rounds.to_i - fantasy_players.size.to_i
+
+                            if fantasy_players.any?
+
+                                fantasy_players.each do |fantasy_player|
+                        %>
+                                    <li>
+                                        <div class="draft_pick_card">
+                                            <span class="label label-info pull-right">$<%=fantasy_player.price%></span>
+                                            <%=fantasy_player.player.first_name%><br />
+                                            <%=fantasy_player.player.last_name%>
+                                        </div>
+                                    </li>
+                        <%
+                                end
+                            end
+                        %>
+
+                        <% team_rounds.times do |round| round = round + 1  %>
+                            <li>
+
+                            </li>
+                        <% end %>
+                    </ul>
+                <% end %>
+
+            </div>
+        </div>
+        <div class="span2">
+            <div class="on_the_block">
+                <% if @fantasy_draft.player_id %>
+                    <div class="otb_image">
+                    <img src="http://www.fantasyfootballnerd.com/images/players/<%= @fantasy_draft.player.ffn_player_id %>.jpg" width="75" alt="" />
+                    </div>
+                    <div class="otb_info">
+                        <div class="otb_first_name"><%= @fantasy_draft.player.first_name %></div>
+                        <div class="otb_last_name"><%= @fantasy_draft.player.last_name %></div>
+                        <div class="otb_team"><%= @fantasy_draft.player.position.name %> | <%= @fantasy_draft.player.team.full_name %></div>
+                        <div class="otb_college">College: <%= @fantasy_draft.player.college %></div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="otb_other_info clearfix">
+                        <div class="otb_stat">Average Auction Value: $<%= @fantasy_draft.player.player_auction_value.avg_price %></div>
+                        <div class="otb_stat">Projected Fantasy Points: <%= @fantasy_draft.player.player_projection.fantasy_points %></div>
+                    </div>
+                <% else %>
+                    Next Pick
+                <% end %>
+
+            </div>
+
+            <div class="previous_draft_picks">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Previous Picks</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%@fantasy_players.reverse.each do |fantasy_player| %>
+                            <tr>
+                                <td><%= fantasy_player.player.name %> - <small><%= fantasy_player.fantasy_team.name %></small> </td>
+                                <td>$<%= fantasy_player.price %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

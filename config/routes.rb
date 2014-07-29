@@ -20,6 +20,11 @@ Rails.application.routes.draw do
     resources :fantasy_teams do
       resources :fantasy_players
     end
+    resources :fantasy_drafts do
+      get '/manager', to: 'fantasy_drafts#manager'
+      resources :fantasy_players
+      resources :fantasy_draft_orders
+    end
   end
 
   root 'fantasy_leagues#index'

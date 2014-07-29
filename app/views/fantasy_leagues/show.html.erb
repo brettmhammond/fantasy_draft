@@ -48,11 +48,9 @@
         <table class="table">
           <thead>
             <tr>
-              <th>ID</th>
               <th>Style</th>
               <th>Rounds</th>
               <th>Max Amount</th>
-              <th></th>
               <th></th>
             </tr>
           </thead>
@@ -60,15 +58,13 @@
           <tbody>
             <% @fantasy_league.fantasy_drafts.each do |fantasy_draft| %>
               <tr>
-                <td><%= fantasy_draft.id %></td>
                 <td><%= fantasy_draft.fantasy_draft_style.name %> Draft</td>
                 <td><%= fantasy_draft.rounds %></td>
                 <td><%= fantasy_draft.max_amount %></td>
                 <td>
-                    <%= link_to 'GO TO DRAFT BOARD', edit_fantasy_league_fantasy_draft_path(@fantasy_league, fantasy_draft), :class => 'btn btn-small btn-danger btn-block' %>
-                </td>
-                <td>
-                    <%= link_to 'Edit', edit_fantasy_league_fantasy_draft_path(@fantasy_league, fantasy_draft), :class => 'btn btn-small' %>
+                    <%= link_to 'GO TO DRAFT BOARD', fantasy_league_fantasy_draft_path(@fantasy_league, fantasy_draft), :class => 'btn btn-small btn-danger' %>
+                    <%= link_to 'Manager', fantasy_league_fantasy_draft_manager_path(@fantasy_league, fantasy_draft), :class => 'btn btn-small' %>
+                    <%= link_to 'Settings', edit_fantasy_league_fantasy_draft_path(@fantasy_league, fantasy_draft), :class => 'btn btn-small' %>
                 </td>
               </tr>
             <% end %>

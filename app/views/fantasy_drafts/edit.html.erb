@@ -1,5 +1,5 @@
 <h3><%= @fantasy_league.name %> | Draft Management</h3>
-
+<%= link_to 'Set Draft Order', fantasy_league_fantasy_draft_fantasy_draft_orders_path(@fantasy_league, @fantasy_draft) %>
 
 <%= render 'form' %>
-<%= link_to 'Back', fantasy_leagues_path %>
+<%= link_to 'Back', fantasy_league_path(@fantasy_league) %>
