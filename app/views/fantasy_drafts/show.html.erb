@@ -23,15 +23,10 @@
     <div class="row-fluid">
         <div class="span12">
             <ul class="draft_order">
-                <% @fantasy_draft.rounds.times do |round|%>
-                    <li class="draft_order__round_slot">
-                        Round: <%= round + 1 %>
+                <% @fantasy_order.each do |fantasy_team| %>
+                    <li class="draft_order__slot">
+                        <%= fantasy_team.name %>
                     </li>
-                    <% @fantasy_draft_orders.each do |fantasy_draft_order| %>
-                        <li class="draft_order__slot">
-                            <%= fantasy_draft_order.fantasy_team.name %>
-                        </li>
-                    <% end %>
                 <% end %>
             </ul>
         </div>
@@ -62,7 +57,7 @@
                                                     fantasy_draft_id: params[:id],
                                                     fantasy_league_id: params[:fantasy_league_id],
                                                     fantasy_team_id: fantasy_draft_order.fantasy_team.id
-                                                ).order('id DESC')
+                                                ).order('id ASC')
 
                         team_rounds = @fantasy_draft.rounds.to_i - fantasy_players.size.to_i
 
@@ -70,7 +65,6 @@
 
                         if fantasy_players.any?
 
-                            total_spent = 0;
                             fantasy_players.each do |fantasy_player|
                                 total_spent += fantasy_player.price
                             end
@@ -85,17 +79,19 @@
                             <%=fantasy_draft_order.fantasy_team.name%>
                         </li>
                         <li style="text-align:center; line-height: 15px; font-size:12px; height:20px; ">
-                            Max Bid: $<%=max_bid%>
+                            Max Bid: $<%=max_bid + 1%>
                         </li>
                         <%
                             if fantasy_players.any?
                                 fantasy_players.each do |fantasy_player|
                         %>
-                                    <li>
+                                    <li class="<%=fantasy_player.player.position.name%>">
                                         <div class="draft_pick_card">
+                                            <span class="label label-info pull-left"><%=fantasy_player.player.position.name%></span>
                                             <span class="label label-info pull-right">$<%=fantasy_player.price%></span>
-                                            <%=fantasy_player.player.first_name%><br />
-                                            <%=fantasy_player.player.last_name%>
+                                            <div class="first_name"><%=fantasy_player.player.first_name%></div>
+                                            <div class="last_name"><%=fantasy_player.player.last_name%></div>
+
                                         </div>
                                     </li>
                         <%
@@ -113,12 +109,9 @@
 
             </div>
         </div>
-        <div class="span2">
+        <div class="span2" style="margin-left:10px">
             <div class="on_the_block">
                 <% if @fantasy_draft.player_id %>
-                    <div class="otb_image">
-                    <img src="http://www.fantasyfootballnerd.com/images/players/<%= @fantasy_draft.player.ffn_player_id %>.jpg" width="75" alt="" />
-                    </div>
                     <div class="otb_info">
                         <div class="otb_first_name"><%= @fantasy_draft.player.first_name %></div>
                         <div class="otb_last_name"><%= @fantasy_draft.player.last_name %></div>
@@ -130,7 +123,16 @@
                     <div class="otb_other_info clearfix">
                     </div>
                 <% else %>
-                    Next Pick
+                    <div class="next_pick">
+                        Next Pick<br />
+                        <div class="name">
+                            <%= @fantasy_order.first.name %>
+                        </div>
+                        <div class="owner">
+                            <%= @fantasy_order.first.owner %>
+                        </div>
+                    </div>
+
                 <% end %>
 
             </div>
@@ -145,7 +147,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%@fantasy_players.reverse.each do |fantasy_player| %>
+                        <%@fantasy_players.each do |fantasy_player| %>
                             <tr>
                                 <td><%= fantasy_player.player.name %> - <small><%= fantasy_player.fantasy_team.name %></small> </td>
                                 <td>$<%= fantasy_player.price %></td>

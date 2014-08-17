@@ -25,11 +25,39 @@ class FantasyDraftsController < ApplicationController
   # GET /drafts/1
   # GET /drafts/1.json
   def show
-    @fantasy_league = FantasyLeague.includes(:fantasy_teams).find(params[:fantasy_league_id])
-    @fantasy_draft = FantasyDraft.find(params[:id])
+    @fantasy_league       = FantasyLeague.includes(:fantasy_teams).find(params[:fantasy_league_id])
+    @fantasy_draft        = FantasyDraft.find(params[:id])
     @fantasy_draft_orders = FantasyDraftOrder.where(fantasy_league_id: params[:fantasy_league_id], fantasy_draft_id: params[:id]).order('position ASC')
-    @fantasy_players = FantasyPlayer.where(fantasy_draft_id: params[:id], fantasy_league_id: params[:fantasy_league_id]).order('id DESC')
+    @fantasy_players      = FantasyPlayer.where(fantasy_draft_id: params[:id], fantasy_league_id: params[:fantasy_league_id]).order('id DESC')
 
+
+    temp_keys = Array.new
+    temp_counter = 0
+    @fantasy_players.each do
+      temp_keys << temp_counter
+      temp_counter += 1
+
+    end
+
+    # raise temp_keys.to_yaml
+    # raise @fantasy_players.to_yaml
+
+    # Build out the fantasy order so we can easily loop through it
+    @fantasy_order = Array.new
+
+    counter = 0
+    @fantasy_draft.rounds.times do
+
+      @fantasy_draft_orders.each do |fantasy_draft_order|
+        if not temp_keys.include? counter
+          @fantasy_order << fantasy_draft_order.fantasy_team
+        end
+        counter += 1
+      end
+
+    end
+
+    # raise @fantasy_order.to_yaml
     # raise @fantasy_draft_orders.to_yaml
 
 
