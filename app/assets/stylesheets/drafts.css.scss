@@ -95,7 +95,6 @@ ol {
 
     }
 
-
     .draft_board__column{
         margin: none;
         padding: none;
@@ -312,4 +311,34 @@ ol {
 
 }
 
+@media all and (max-width: 1800px) and (min-width: 900px) {
+
+    #draft_board{
+        .draft_board__column{
+            li{
+                .draft_pick_card{
+                    .label{
+                        font-size: 8px;
+                        padding:2px 3px;
+                    }
+
+                    .first_name{
+                        font-size: 8px;
+                    }
+                    .last_name{
+                        font-weight: bold;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+
+    .draft_board__column{
+        li:first-child{
+            font-size: 9px;
+        }
+    }
+
+}
 
