@@ -77,6 +77,11 @@ class FantasyDraftsController < ApplicationController
 
     respond_to do |format|
       if @fantasy_draft.save
+
+        Pusher['dashboard'].trigger('refresh_dashboard', {
+          message: 'refreshing dashboard'
+        })
+
         format.html { redirect_to fantasy_league_url(@fantasy_draft.fantasy_league_id), notice: 'Draft was successfully created.' }
         format.json { render :show, status: :created, location: @fantasy_draft }
       else
@@ -91,6 +96,10 @@ class FantasyDraftsController < ApplicationController
   def update
     respond_to do |format|
       if @fantasy_draft.update(fantasy_draft_params)
+
+        Pusher['dashboard'].trigger('refresh_dashboard', {
+          message: 'refreshing dashboard'
+        })
 
         if params[:fantasy_draft][:redirect_to].to_s == 'manager'
           format.html { redirect_to fantasy_league_fantasy_draft_manager_path(@fantasy_draft.fantasy_league_id, @fantasy_draft), notice: 'Draft was successfully updated.' }

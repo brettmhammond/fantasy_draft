@@ -31,13 +31,9 @@ class FantasyPlayersController < ApplicationController
     respond_to do |format|
       if @fantasy_player.save
 
-        base_uri = 'https://tmiufof4z6z.firebaseio-demo.com/'
-        firebase = Firebase::Client.new(base_uri)
-        response = firebase.push("todos", { :name => 'Pick the milk', :priority => 1 })
-
-        # Pusher['test_channel'].trigger('my_event', {
-        #   message: 'hello world'
-        # })
+        Pusher['dashboard'].trigger('refresh_dashboard', {
+          message: 'refreshing dashboard'
+        })
 
         fantasy_draft = FantasyDraft.find(@fantasy_player.fantasy_draft_id)
         fantasy_draft.player_id = nil
@@ -57,6 +53,11 @@ class FantasyPlayersController < ApplicationController
   def update
     respond_to do |format|
       if @fantasy_player.update(fantasy_player_params)
+
+        Pusher['dashboard'].trigger('refresh_dashboard', {
+          message: 'refreshing dashboard'
+        })
+
         format.html { redirect_to fantasy_league_fantasy_draft_manager_path(@fantasy_player.fantasy_league_id, @fantasy_player.fantasy_draft_id), notice: 'Fantasy player was successfully updated.' }
         format.json { render :show, status: :ok, location: @fantasy_player }
       else
@@ -70,6 +71,11 @@ class FantasyPlayersController < ApplicationController
   # DELETE /fantasy_players/1.json
   def destroy
     @fantasy_player.destroy
+
+    Pusher['dashboard'].trigger('refresh_dashboard', {
+      message: 'refreshing dashboard'
+    })
+
     respond_to do |format|
       format.html { redirect_to fantasy_league_fantasy_draft_manager_path(@fantasy_player.fantasy_league_id, @fantasy_player.fantasy_draft_id), notice: 'Fantasy player was successfully destroyed.' }
       format.json { head :no_content }
