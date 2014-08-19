@@ -26,8 +26,14 @@ class FantasyPlayersController < ApplicationController
   def create
     @fantasy_player = FantasyPlayer.new(fantasy_player_params)
 
+    # raise @fantasy_player.to_yaml
+
     respond_to do |format|
       if @fantasy_player.save
+
+        base_uri = 'https://tmiufof4z6z.firebaseio-demo.com/'
+        firebase = Firebase::Client.new(base_uri)
+        response = firebase.push("todos", { :name => 'Pick the milk', :priority => 1 })
 
         # Pusher['test_channel'].trigger('my_event', {
         #   message: 'hello world'

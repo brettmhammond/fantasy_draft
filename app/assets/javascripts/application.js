@@ -17,6 +17,14 @@
 //= require_tree .
 
 
+var myDataRef = new Firebase('https://tmiufof4z6z.firebaseio-demo.com/');
+
+myDataRef.on('todos', function(snapshot) {
+    console.log(snapshot);
+    alert('fired');
+  //We'll fill this in later.
+});
+
 
 $(document).ready(function() {
     $(".select2").select2();

@@ -36,7 +36,6 @@ class FantasyDraftsController < ApplicationController
     @fantasy_players.each do
       temp_keys << temp_counter
       temp_counter += 1
-
     end
 
     # raise temp_keys.to_yaml
@@ -56,15 +55,6 @@ class FantasyDraftsController < ApplicationController
       end
 
     end
-
-    # raise @fantasy_order.to_yaml
-    # raise @fantasy_draft_orders.to_yaml
-
-
-
-
-
-
 
     render layout: "draft_board"
   end
