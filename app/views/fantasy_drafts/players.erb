@@ -1,37 +1,41 @@
+<div data-role="collapsible">
+    <h4><center>Filter By Position</center></h4>
+    <p>
+      <a class="ui-btn" href="<%=fantasy_league_fantasy_draft_players_path%>">All</a>
+      <% Position.all.each do |position| %>
+        <%= link_to position.name, fantasy_league_fantasy_draft_players_path(:position_id => position.id), :class => 'ui-btn' %>
+      <% end %>
+    </p>
+</div>
+
 <form>
     <input id="filter-for-listview" data-type="search" placeholder="Type to search...">
 </form>
 
-
-<ul data-role="listview" data-inset="true" style="min-width:210px;">
-    <li data-role="list-divider">Filter By Position</li>
-    <li><a href="<%=fantasy_league_fantasy_draft_players_path%>">All</a></li>
-    <% Position.all.each do |position| %>
-        <li><%= link_to position.name, fantasy_league_fantasy_draft_players_path(:position_id => position.id) %></li>
-    <% end %>
-</ul>
-
-
 <ul data-role="listview" data-inset="true" data-filter="true" data-input="#filter-for-listview">
   <% @player_ranks.each do |player_rank| %>
   <li>
-    <%= player_rank.position_rank %>.   <%= player_rank.player.name %> (<%= player_rank.player.position.name %>)
+    <%= player_rank.position_rank %>.   <%= player_rank.player.name %> [<%= player_rank.player.position.name %>]  [<%= player_rank.player.team.key %>]
+    <% if not player_rank.player.player_auction_value.nil? %>
+      <div style="float:right">
+        $<%= player_rank.player.player_auction_value.avg_price %>
+      </div>
+    <% end %>
   <% end %>
   </li>
 </ul>
 
-
 <script type="text/javascript">
-    // Enable pusher logging - don't include this in production
-    Pusher.log = function(message) {
-      if (window.console && window.console.log) {
-        window.console.log(message);
-      }
-    };
+  // Enable pusher logging - don't include this in production
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) {
+      window.console.log(message);
+    }
+  };
 
-    var pusher = new Pusher('a85a38516f6db88b62ae');
-    var channel = pusher.subscribe('dashboard');
-    channel.bind('refresh_dashboard', function(data) {
-      location.reload();
-    });
-  </script>
+  var pusher = new Pusher('a85a38516f6db88b62ae');
+  var channel = pusher.subscribe('dashboard');
+  channel.bind('refresh_dashboard', function(data) {
+    location.reload();
+  });
+</script>
