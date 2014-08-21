@@ -1,0 +1,38 @@
+<h4>Player Ranks</h4>
+
+<%
+ if params[:position_id]
+  style='btn'
+ else
+  style='btn active'
+ end
+%>
+
+<div class="btn-group">
+  <a href="<%=player_ranks_path%>" class="<%=style%>">All</a>
+  <% Position.all.each do |position|
+     if params[:position_id] && params[:position_id].to_i == position.id
+      style='btn active'
+     else
+      style='btn'
+     end
+    %>
+
+
+      <%= link_to position.name, player_ranks_path(:position_id => position.id), :class => style %>
+  <% end %>
+</div>
+
+<div class="clearfix"></div>
+<br />
+
+<ul data-role="listview">
+  <% @player_ranks.each do |player_rank| %>
+  <li>
+    <div class="pull-right">
+      <%= player_rank.position_rank %>
+    </div>
+    <%= player_rank.player.name %> (<%= player_rank.player.position.name %>)
+  <% end %>
+  </li>
+</ul>
