@@ -3,12 +3,12 @@
 <head>
   <title>Fantasy</title>
   <script src="//js.pusher.com/2.2/pusher.min.js" type="text/javascript"></script>
-  <%= stylesheet_link_tag    'application', 'jquery.mobile', media: 'all' %>
+  <%= stylesheet_link_tag    'jquery.mobile', media: 'all' %>
   <%= javascript_include_tag 'application', 'jquery.mobile' %>
   <%= csrf_meta_tags %>
 
 </head>
-<body id="draft_board_layout">
+<body data-role="page">
     <%= yield %>
 </body>
 </html>
