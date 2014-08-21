@@ -7,6 +7,26 @@ class FantasyDraftsController < ApplicationController
     @fantasy_drafts = FantasyDraft.all
   end
 
+  def players
+
+    @fantasy_players = FantasyPlayer.where(fantasy_draft_id: params[:fantasy_draft_id], fantasy_league_id: params[:fantasy_league_id]).order('id DESC')
+
+    if params[:position_id]
+      if @fantasy_players.any?
+        @player_ranks = PlayerRank.joins(:player, :team, :position).where('player_id not in (?)', @fantasy_players.map(&:player_id)).where('positions.id = ?', params[:position_id]).order('position_rank ASC')
+      else
+        @player_ranks = PlayerRank.joins(:player, :team, :position).where('positions.id = ?', params[:position_id]).order('position_rank ASC')
+      end
+    else
+      if @fantasy_players.any?
+        @player_ranks = PlayerRank.includes(:player, :team, :position).where('player_id not in (?)', @fantasy_players.map(&:player_id)).order('overall_rank ASC')
+      else
+        @player_ranks = PlayerRank.includes(:player, :team, :position).order('overall_rank ASC')
+      end
+    end
+    render layout: "players"
+  end
+
   def manager
     @fantasy_league = FantasyLeague.includes(:fantasy_teams).find(params[:fantasy_league_id])
     @fantasy_draft = FantasyDraft.find(params[:fantasy_draft_id])

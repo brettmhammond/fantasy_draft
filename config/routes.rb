@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     end
     resources :fantasy_drafts do
       get '/manager', to: 'fantasy_drafts#manager'
+      get '/players', to: 'fantasy_drafts#players'
       resources :fantasy_players
       resources :fantasy_draft_orders
     end
