@@ -19,3 +19,19 @@
   <% end %>
   </li>
 </ul>
+
+
+<script type="text/javascript">
+    // Enable pusher logging - don't include this in production
+    Pusher.log = function(message) {
+      if (window.console && window.console.log) {
+        window.console.log(message);
+      }
+    };
+
+    var pusher = new Pusher('a85a38516f6db88b62ae');
+    var channel = pusher.subscribe('dashboard');
+    channel.bind('refresh_dashboard', function(data) {
+      location.reload();
+    });
+  </script>
