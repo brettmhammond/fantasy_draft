@@ -2,25 +2,20 @@
     <input id="filter-for-listview" data-type="search" placeholder="Type to search...">
 </form>
 
-<a href="#popupMenu" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">
-Select Position
-</a>
-<div data-role="popup" id="popupMenu" data-theme="b">
-  <ul data-role="listview" data-inset="true" style="min-width:210px;">
-      <li data-role="list-divider">Choose an position</li>
-      <li><a href="<%=player_ranks_path%>" class="<%=style%>">All</a></li>
-      <% Position.all.each do |position| %>
 
+<ul data-role="listview" data-inset="true" style="min-width:210px;">
+    <li data-role="list-divider">Filter By Position</li>
+    <li><a href="<%=fantasy_league_fantasy_draft_players_path%>">All</a></li>
+    <% Position.all.each do |position| %>
+        <li><%= link_to position.name, fantasy_league_fantasy_draft_players_path(:position_id => position.id) %></li>
+    <% end %>
+</ul>
 
-          <li><%= link_to position.name, player_ranks_path(:position_id => position.id) %></li>
-      <% end %>
-  </ul>
-</div>
 
 <ul data-role="listview" data-inset="true" data-filter="true" data-input="#filter-for-listview">
   <% @player_ranks.each do |player_rank| %>
   <li>
-    <%= player_rank.player.name %> (<%= player_rank.player.position.name %>)
+    <%= player_rank.position_rank %>.   <%= player_rank.player.name %> (<%= player_rank.player.position.name %>)
   <% end %>
   </li>
 </ul>
