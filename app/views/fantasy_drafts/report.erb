@@ -1,0 +1,47 @@
+<div class="row-fluid">
+    <div class="span12">
+
+        <h4>Fantasy Draft Report Card</h4>
+        <hr />
+        <br />
+
+        <%
+            @fantasy_league.fantasy_teams.each do |fantasy_team|
+
+                @fantasy_players = FantasyPlayer.where(
+                                                    fantasy_team_id: fantasy_team.id,
+                                                    fantasy_draft_id: params[:fantasy_draft_id],
+                                                    fantasy_league_id: params[:fantasy_league_id]
+                                                ).order('id DESC')
+
+        %>
+
+            <h3><%= fantasy_team.name %> <small>[<%= fantasy_team.owner %>]</small></h3>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th width="90%">Player</th>
+                  <th width="10%">Price Paid</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @fantasy_players.each do |fantasy_player| %>
+                  <tr>
+                    <td>
+                       <%= fantasy_player.player.last_name %>, <%= fantasy_player.player.first_name %>
+                    </td>
+                    <td>$<%= fantasy_player.price %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <hr />
+            <br />
+
+
+        <% end %>
+
+    </div>
+</div>
+

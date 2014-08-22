@@ -7,6 +7,11 @@ class FantasyDraftsController < ApplicationController
     @fantasy_drafts = FantasyDraft.all
   end
 
+  def report
+    @fantasy_league = FantasyLeague.includes(:fantasy_teams).find(params[:fantasy_league_id])
+  end
+
+
   def players
 
     @fantasy_players = FantasyPlayer.where(fantasy_draft_id: params[:fantasy_draft_id], fantasy_league_id: params[:fantasy_league_id]).order('id DESC')
@@ -26,6 +31,8 @@ class FantasyDraftsController < ApplicationController
     end
     render layout: "players"
   end
+
+
 
   def manager
     @fantasy_league = FantasyLeague.includes(:fantasy_teams).find(params[:fantasy_league_id])
