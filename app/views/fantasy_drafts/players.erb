@@ -15,12 +15,25 @@
 <ul data-role="listview" data-inset="true" data-filter="true" data-input="#filter-for-listview">
   <% @player_ranks.each do |player_rank| %>
   <li>
-    <%= player_rank.position_rank %>.   <%= player_rank.player.name %> [<%= player_rank.player.position.name %>]  [<%= player_rank.player.team.key %>]
-    <% if not player_rank.player.player_auction_value.nil? %>
-      <div style="float:right">
-        $<%= player_rank.player.player_auction_value.avg_price %>
-      </div>
+    <% if params[:position_id] %>
+        <%= player_rank.position_rank %>.
+    <% else %>
+        <%= player_rank.overall_rank %>.
     <% end %>
+       <%= player_rank.player.name %> [<%= player_rank.player.position.name %>]  [<%= player_rank.player.team.key %>]
+
+    <div style="float:right">
+      <% if not player_rank.player.player_auction_value.nil?%>
+        <% if player_rank.player.player_auction_value.avg_price != 0 %>
+            $<%= player_rank.player.player_auction_value.avg_price %>
+        <% else %>
+            $1
+        <% end %>
+      <% else %>
+          $1
+      <% end %>
+    </div>
+
   <% end %>
   </li>
 </ul>
