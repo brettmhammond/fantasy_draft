@@ -150,24 +150,6 @@
                                         </td>
                                     </tr>
                                 <% end %>
-                                <% if not @fantasy_draft.player.player_auction_value.nil? %>
-                                    <tr>
-                                        <td class="title">
-                                            Avg Price:
-                                        </td>
-                                        <td class="stat">
-                                            $<%= @fantasy_draft.player.player_auction_value.avg_price %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="title">
-                                            Max Price:
-                                        </td>
-                                        <td class="stat">
-                                            $<%= @fantasy_draft.player.player_auction_value.max_price %>
-                                        </td>
-                                    </tr>
-                                <% end %>
                                 <% if not @fantasy_draft.player.player_projection.nil? %>
                                     <tr>
                                         <td class="title">
