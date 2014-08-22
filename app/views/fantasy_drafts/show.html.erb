@@ -130,36 +130,7 @@
                                         </td>
                                     </tr>
                                 <% end %>
-                                <% if not @fantasy_draft.player.player_rank.nil? %>
-                                    <tr>
-                                        <td class="title">
-                                            Position Rank:
-                                        </td>
-                                        <td class="stat">
-                                            <%= @fantasy_draft.player.player_rank.position_rank %>
-                                        </td>
-                                    </tr>
-                                <% end %>
-                                <% if not @fantasy_draft.player.player_rank.nil? %>
-                                    <tr>
-                                        <td class="title">
-                                            Overall Rank:
-                                        </td>
-                                        <td class="stat">
-                                            <%= @fantasy_draft.player.player_rank.overall_rank %>
-                                        </td>
-                                    </tr>
-                                <% end %>
-                                <% if not @fantasy_draft.player.player_projection.nil? %>
-                                    <tr>
-                                        <td class="title">
-                                            Fantasy Points:
-                                        </td>
-                                        <td class="stat">
-                                            <%= @fantasy_draft.player.player_projection.fantasy_points %>
-                                        </td>
-                                    </tr>
-                                <% end %>
+
                                 <% if @fantasy_draft.player.uniform_number && @fantasy_draft.player.uniform_number.to_s != '0'%>
                                     <tr>
                                         <td class="title">
