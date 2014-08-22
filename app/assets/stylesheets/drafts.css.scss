@@ -10,7 +10,10 @@ ol {
     margin: 0;
 }
 
-#draft_board_layout{
+body#draft_board_layout{
+    margin:0;
+    padding:0;
+    height:1500px;
     background: rgb(125,126,125); /* Old browsers */
     background: -moz-linear-gradient(top,  rgba(125,126,125,1) 0%, rgba(14,14,14,1) 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,126,125,1)), color-stop(100%,rgba(14,14,14,1))); /* Chrome,Safari4+ */
@@ -33,6 +36,20 @@ ol {
     margin-top: 25px;
     color:white;
     text-shadow: 2px 4px 2px #525252;
+}
+
+#board_name_default{
+    float:left;
+    font-size: 50px;
+    margin-top: 25px;
+}
+
+#board_name_default a{
+    color:black;
+}
+
+#board_name_default a:hover{
+    text-decoration: none
 }
 
 .draft_board_league_row{
@@ -222,7 +239,6 @@ ol {
     .otb_stat{
         font-size: 15px;
         line-height: 20px;
-        text-shadow: 0px 1px 1px #999;
         color:#565656;
     }
 
@@ -233,7 +249,6 @@ ol {
             font-size: 30px;
             line-height: 35px;
             font-weight: bold;
-            text-shadow: 0px 1px 1px #999;
             color:#565656;
             text-align: center;
         }
@@ -241,28 +256,24 @@ ol {
             font-size: 30px;
             line-height: 35px;
             font-weight: bold;
-            text-shadow: 0px 1px 1px #999;
             color:#565656;
             text-align: center;
         }
         .otb_team{
             font-size: 15px;
             line-height: 20px;
-            text-shadow: 0px 1px 1px #999;
             color:#565656;
             text-align: center;
         }
         .otb_college{
             font-size: 15px;
             line-height: 20px;
-            text-shadow: 0px 1px 1px #999;
             color:#565656;
             text-align: center;
         }
         .otb_age{
             font-size: 15px;
             line-height: 20px;
-            text-shadow: 0px 1px 1px #999;
             color:#565656;
         }
 

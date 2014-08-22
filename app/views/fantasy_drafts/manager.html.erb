@@ -65,7 +65,13 @@
               for
               <br />
               <br />
-              <%= f.number_field :price, :class => 'span2' %>
+
+              <div class="input-prepend">
+                <span class="add-on">$</span>
+                <%= f.number_field :price, :class => 'span5' %>
+              </div>
+
+
               <br />
               <br />
               dollars
@@ -107,7 +113,7 @@
             <% @fantasy_players.each do |fantasy_player| %>
               <tr>
                 <td>
-                   <%= fantasy_player.player.last_name %>, <%= fantasy_player.player.first_name %> (<%= fantasy_player.player.position.name %>) - <%= fantasy_player.player.team.key %>
+                   <%= fantasy_player.player.name %> (<%= fantasy_player.player.position.name %>) - <%= fantasy_player.player.team.key %>
                 </td>
                 <td>
                    $<%= fantasy_player.price %>
@@ -121,7 +127,7 @@
                 <td>
                    <%= link_to 'Edit Pick', edit_fantasy_league_fantasy_draft_fantasy_player_path(@fantasy_league, @fantasy_draft, fantasy_player), :class => 'btn btn-small' %>
 
-                   <%= link_to 'Delete Draft Pick', fantasy_league_fantasy_draft_fantasy_player_path(@fantasy_league, @fantasy_draft, fantasy_player), :class => 'btn btn-small', method: :delete, data: { confirm: 'Are you sure you want to delete this pick?' } %>
+                   <%= link_to 'Delete Draft Pick', fantasy_league_fantasy_draft_fantasy_player_path(@fantasy_league, @fantasy_draft, fantasy_player), :class => 'btn btn-small btn-danger', method: :delete, data: { confirm: 'Are you sure you want to delete this pick?' } %>
                 </td>
               </tr>
             <% end %>
