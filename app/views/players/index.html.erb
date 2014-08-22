@@ -12,8 +12,8 @@
     <% @players.each do |player| %>
       <tr>
         <td>
-          <img src="http://www.fantasyfootballnerd.com/images/players/<%= player.ffn_player_id %>.jpg" width="50" alt="" />
-           <%= player.last_name %>, <%= player.first_name %> (<%= player.position.name %>) - <%= player.team.key %>
+        <%= image_tag("team_logos/#{player.team.key}.png", width: "25", alt: player.team.name)%>
+           <%= player.last_name %>, <%= player.first_name %> (<%= player.position.name %>)
         </td>
         <td><%= link_to 'Edit', edit_player_path(player) %></td>
         <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>

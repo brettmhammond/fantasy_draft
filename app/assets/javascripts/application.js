@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require pusher
 //= require bootstrap
 //= require select2
 //= require_tree .

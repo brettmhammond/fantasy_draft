@@ -18,7 +18,7 @@
           <thead>
             <tr>
               <th width="45%">Team</th>
-              <th width="">Team Owner</th>
+              <th width="">Owner</th>
               <th width="25%"></th>
             </tr>
           </thead>
@@ -29,8 +29,8 @@
                 <td><%= fantasy_team.name %></td>
                 <td><%= fantasy_team.owner %></td>
                 <td>
-                    <%= link_to 'Edit', edit_fantasy_league_fantasy_team_path(@fantasy_league, fantasy_team), :class => 'btn btn-small' %>
-                    <%= link_to 'Delete', fantasy_league_fantasy_team_path(@fantasy_league, fantasy_team), :class => 'btn btn-small', method: :delete, data: { confirm: 'Are you sure?' } %>
+                    <%= link_to 'Edit', edit_fantasy_league_fantasy_team_path(@fantasy_league, fantasy_team), :class => 'btn btn-mini' %>
+                    <%= link_to 'Delete', fantasy_league_fantasy_team_path(@fantasy_league, fantasy_team), :class => 'btn btn-mini btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
                 </td>
               </tr>
             <% end %>
@@ -60,7 +60,7 @@
               <tr>
                 <td><%= fantasy_draft.fantasy_draft_style.name %> Draft</td>
                 <td><%= fantasy_draft.rounds %></td>
-                <td><%= fantasy_draft.max_amount %></td>
+                <td>$<%= fantasy_draft.max_amount %></td>
                 <td>
 
                   <div class="btn-group">
@@ -81,6 +81,10 @@
                       <li>
                         <%= link_to 'Manager', fantasy_league_fantasy_draft_manager_path(@fantasy_league, fantasy_draft) %>
                       </li>
+                      <li>
+                        <%= link_to 'Set Draft Order', fantasy_league_fantasy_draft_fantasy_draft_orders_path(@fantasy_league, fantasy_draft) %>
+                      </li>
+
                       <li>
                         <%= link_to 'Settings', edit_fantasy_league_fantasy_draft_path(@fantasy_league, fantasy_draft) %>
                       </li>

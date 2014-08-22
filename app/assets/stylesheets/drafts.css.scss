@@ -87,6 +87,12 @@ body#draft_board_layout{
     width: 100%;
     height: 100%;
     border:1px solid #999;
+    background-color: white;
+    overflow: auto;
+    background-image: url('/assets/armchair.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
 
 
     .draft_board__round_column{
@@ -117,7 +123,7 @@ body#draft_board_layout{
         padding: none;
         list-style-type: none;
         float: left;
-        background-color: white;
+
         width:8.083%; // This needs to be calculated within the code
 
         li{
@@ -129,7 +135,8 @@ body#draft_board_layout{
             &:first-child{
                 overflow: hidden;
                 line-height: 45px;
-                text-align: center
+                text-align: center;
+
             }
 
             &.QB{
@@ -221,88 +228,89 @@ body#draft_board_layout{
 
 }
 
-.on_the_block{
+.otb_container{
     width: 100%;
-    height:200px;
     margin-top: 20px;
     padding:10px;
-
-    background: rgb(255,255,255); /* Old browsers */
-    background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(229,229,229,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
-
-    .otb_stat{
-        font-size: 15px;
-        line-height: 20px;
-        color:#565656;
-    }
+    background-color: white;
 
     .otb_info{
+        margin-top: 5px;
         width:100%;
 
-        .otb_first_name{
-            font-size: 30px;
-            line-height: 35px;
+        .otb_table{
+            width: 100%;
+            margin-top: 10px;
+
+            tr{
+                border-bottom: 1px solid #cccccc
+            }
+
+            tr:first-child{
+                border-top: 1px solid #cccccc
+            }
+
+            .title{
+                width: 50%;
+                text-align: right;
+                padding-right: 10px;
+            }
+            .stat{
+                width: 50%;
+                font-weight: bold;
+            }
+
+        }
+
+        .first_name, .last_name{
+            font-size: 20px;
+            line-height: 25px;
+            color:#6b6b6b;
+        }
+
+        .last_name{
+            color:#494949;
             font-weight: bold;
-            color:#565656;
-            text-align: center;
         }
-        .otb_last_name{
-            font-size: 30px;
-            line-height: 35px;
-            font-weight: bold;
-            color:#565656;
-            text-align: center;
-        }
-        .otb_team{
-            font-size: 15px;
-            line-height: 20px;
-            color:#565656;
-            text-align: center;
-        }
-        .otb_college{
-            font-size: 15px;
-            line-height: 20px;
-            color:#565656;
-            text-align: center;
-        }
-        .otb_age{
-            font-size: 15px;
-            line-height: 20px;
-            color:#565656;
+
+        .team_logo{
+            margin-right: 10px;
         }
 
     }
-    .otb_other_info{
-        text-align: center;
-    }
+}
 
+.next_pick_container{
+    width: 100%;
+    height:auto;
+    margin-top: 20px;
+    padding:10px;
+    text-align: center;
+    background-color: white;
 
     .next_pick{
-        text-align: center;
+        font-size: 20px;
+        line-height: 30px;
+        border-bottom: 2px solid #b2b2b2;
+    }
+
+    .name{
+        margin-top: 5px;
         font-size: 25px;
-        line-height: 35px;
-        padding:20px;
+        line-height: 50px;
+        color:#3f3f3f;
+    }
 
-        .name{
-            font-size: 30px;
-            line-height: 40px;
-            font-weight: bold;
-        }
-        .owner{
+    .owner{
+        margin-top: 5px;
+        margin-bottom: 10px;
         font-size: 18px;
-        }
-
-
+        color:#565656;
     }
 
 
 }
+
 
 .previous_draft_picks{
     width: 100%;
@@ -311,17 +319,7 @@ body#draft_board_layout{
     overflow: scroll;
     margin-top: 20px;
     padding:10px;
-
-    background: rgb(255,255,255); /* Old browsers */
-    background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(229,229,229,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
-
-
+    background-color: white;
 }
 
 @media all and (max-width: 1800px) and (min-width: 900px) {

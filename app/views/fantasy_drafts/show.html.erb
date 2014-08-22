@@ -1,17 +1,6 @@
 <div class="container-fluid" style="height:100%;">
 
     <div class="row-fluid">
-        <div class="span12">
-            <div id="board_logo">
-                <%= image_tag("nfl_logo.png")%>
-            </div>
-            <div id="board_name">
-                Fantasy Draft Auctioneer
-            </div>
-        </div>
-    </div>
-
-    <div class="row-fluid">
         <div class="span12 draft_board_league_row">
             <div class="draft_board_league_name">
                 <%=@fantasy_league.name%>
@@ -64,13 +53,12 @@
                         total_spent = 0;
 
                         if fantasy_players.any?
-
                             fantasy_players.each do |fantasy_player|
                                 total_spent += fantasy_player.price
                             end
                         end
 
-                        max_bid = @fantasy_draft.max_amount - total_spent - (@fantasy_draft.rounds - fantasy_players.size.to_i)
+                        max_bid = (@fantasy_draft.max_amount - total_spent - (@fantasy_draft.rounds - fantasy_players.size.to_i)) + 1
 
 
                 %>
@@ -79,7 +67,7 @@
                             <%=fantasy_draft_order.fantasy_team.name%>
                         </li>
                         <li style="text-align:center; line-height: 15px; font-size:10px; height:20px; ">
-                            Max: $<%=max_bid + 1%>
+                            Max: $<%=max_bid%>
                         </li>
                         <%
                             if fantasy_players.any?
@@ -110,58 +98,166 @@
             </div>
         </div>
         <div class="span2" style="margin-left:10px">
-            <div class="on_the_block">
-                <% if @fantasy_draft.player_id %>
 
-
-
-
-
-
-
+            <% if @fantasy_draft.player_id %>
+                <div class="otb_container">
                     <div class="otb_info">
-                        <div class="otb_first_name"><%= @fantasy_draft.player.first_name %></div>
-                        <div class="otb_last_name"><%= @fantasy_draft.player.last_name %></div>
 
-                        <% if @fantasy_draft.player.position.name != 'DEF' %>
-                            <div class="otb_team"><%= @fantasy_draft.player.position.name %> | <%= @fantasy_draft.player.team.full_name %></div>
-                        <% end -%>
+                        <div class="team_logo pull-left">
+                            <%= image_tag("team_logos/#{@fantasy_draft.player.team.key}.png", width: "50", alt: @fantasy_draft.player.team.name)%>
+                        </div>
+
+                        <div class="first_name">
+                            <%= @fantasy_draft.player.first_name %>
+                        </div>
+
+                        <div class="last_name">
+                            <%= @fantasy_draft.player.last_name %>
+                        </div>
+
+                        <div class="clearfix"></div>
 
 
-                        <% if not @fantasy_draft.player.college.empty? %>
-                            <div class="otb_college">College: <%= @fantasy_draft.player.college %></div>
-                        <% end -%>
+                        <table class="otb_table">
+                            <tbody>
+                                <% if not @fantasy_draft.player.position.nil? %>
+                                    <tr>
+                                        <td class="title">
+                                            Position:
+                                        </td>
+                                        <td class="stat">
+                                            <%= @fantasy_draft.player.position.name %>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                                <% if not @fantasy_draft.player.player_rank.nil? %>
+                                    <tr>
+                                        <td class="title">
+                                            Position Rank:
+                                        </td>
+                                        <td class="stat">
+                                            <%= @fantasy_draft.player.player_rank.position_rank %>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                                <% if not @fantasy_draft.player.player_rank.nil? %>
+                                    <tr>
+                                        <td class="title">
+                                            Overall Rank:
+                                        </td>
+                                        <td class="stat">
+                                            <%= @fantasy_draft.player.player_rank.overall_rank %>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                                <% if not @fantasy_draft.player.player_auction_value.nil? %>
+                                    <tr>
+                                        <td class="title">
+                                            Avg Price:
+                                        </td>
+                                        <td class="stat">
+                                            $<%= @fantasy_draft.player.player_auction_value.avg_price %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="title">
+                                            Max Price:
+                                        </td>
+                                        <td class="stat">
+                                            $<%= @fantasy_draft.player.player_auction_value.max_price %>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                                <% if not @fantasy_draft.player.player_projection.nil? %>
+                                    <tr>
+                                        <td class="title">
+                                            Fantasy Points:
+                                        </td>
+                                        <td class="stat">
+                                            <%= @fantasy_draft.player.player_projection.fantasy_points %>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                                <% if @fantasy_draft.player.uniform_number && @fantasy_draft.player.uniform_number.to_s != '0'%>
+                                    <tr>
+                                        <td class="title">
+                                            Number:
+                                        </td>
+                                        <td class="stat">
+                                            #<%= @fantasy_draft.player.uniform_number %>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                                <% if not @fantasy_draft.player.height.empty? %>
+                                    <tr>
+                                        <td class="title">
+                                            Height:
+                                        </td>
+                                        <td class="stat">
+                                            <%= @fantasy_draft.player.height %>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                                <% if not @fantasy_draft.player.weight.empty? %>
+                                    <tr>
+                                        <td class="title">
+                                            Weight:
+                                        </td>
+                                        <td class="stat">
+                                            <%= @fantasy_draft.player.weight %> lbs
+                                        </td>
+                                    </tr>
+                                <% end %>
+                                <% if @fantasy_draft.player.date_of_birth.to_s != '0000-00-00' %>
+                                    <tr>
+                                        <td class="title">
+                                            Age:
+                                        </td>
+                                        <td class="stat">
+                                            <%= @fantasy_draft.player.age %>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                                <% if not @fantasy_draft.player.college.empty? %>
+                                    <tr>
+                                        <td class="title">
+                                            College:
+                                        </td>
+                                        <td class="stat">
+                                            <%= @fantasy_draft.player.college %>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                                <% if @fantasy_draft.player.team.bye.week %>
+                                    <tr>
+                                        <td class="title">
+                                            Bye Week:
+                                        </td>
+                                        <td class="stat">
+                                            Week <%= @fantasy_draft.player.team.bye.week %>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
                     </div>
-                    <br />
-                    <div class="otb_other_info">
+                </div>
 
-                        <% if not @fantasy_draft.player.player_auction_value.nil? %>
-                            <div class="">
-                                Avg $<%= @fantasy_draft.player.player_auction_value.avg_price %> | Max $<%= @fantasy_draft.player.player_auction_value.max_price %>
-                            </div>
-                        <% end -%>
-
-
-                    </div>
-
-
-
-
-
-                <% else %>
+            <% else %>
+                <div class="next_pick_container">
                     <div class="next_pick">
-                        Next Pick<br />
-                        <div class="name">
-                            <%= @fantasy_order.first.name %>
-                        </div>
-                        <div class="owner">
-                            <%= @fantasy_order.first.owner %>
-                        </div>
+                        Next Draft Pick
                     </div>
+                    <div class="name">
+                        <%= @fantasy_order.first.name %>
+                    </div>
+                    <div class="owner">
+                        <%= @fantasy_order.first.owner %>
+                    </div>
+                </div>
 
-                <% end %>
+            <% end %>
 
-            </div>
 
             <div class="previous_draft_picks">
 
@@ -175,7 +271,13 @@
                     <tbody>
                         <%@fantasy_players.each do |fantasy_player| %>
                             <tr>
-                                <td><%= fantasy_player.player.name %> - <small><%= fantasy_player.fantasy_team.name %></small> </td>
+                                <td>
+                                    <%= fantasy_player.player.name %>
+                                    <br />
+                                    <small>
+                                        <%= fantasy_player.fantasy_team.name %>
+                                    </small>
+                                </td>
                                 <td>$<%= fantasy_player.price %></td>
                             </tr>
                         <% end %>

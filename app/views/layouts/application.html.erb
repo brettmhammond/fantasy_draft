@@ -3,13 +3,12 @@
 <head>
   <title>Fantasy Draft</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <script src="//js.pusher.com/2.2/pusher.min.js" type="text/javascript"></script>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<div class="container-fluid">
+<div class="container">
 
       <div class="row-fluid">
           <div class="span12">
@@ -17,7 +16,7 @@
                   <%= image_tag("nfl_logo.png")%>
               </div>
               <div id="board_name_default">
-                <%= link_to 'Fantasy Draft Auctioneer', root_path %>
+                <%= link_to 'Fantasy Draft', root_path %>
 
               </div>
           </div>
@@ -28,6 +27,7 @@
           <div class="navbar-inner">
             <div class="container">
               <ul class="nav">
+                <li><%= link_to 'Fantasy Leagues', fantasy_leagues_path %></li>
                 <li><%= link_to 'Teams', teams_path %></li>
                 <li><%= link_to 'Schedule', schedules_path %></li>
                 <li><%= link_to 'Byes', byes_path %></li>
@@ -36,9 +36,6 @@
                 <li><%= link_to 'Rankings', player_ranks_path %></li>
                 <li><%= link_to 'Projections', player_projections_path %></li>
                 <li><%= link_to 'Values', player_auction_values_path %></li>
-                <li><%= link_to 'Fantasy Leagues', fantasy_leagues_path %></li>
-                <li><%= link_to 'Fantasy Teams', fantasy_teams_path %></li>
-                <li><%= link_to 'Drafts', fantasy_drafts_path %></li>
               </ul>
             </div>
           </div>
