@@ -13,23 +13,15 @@
 
   <div class="field">
     <%= f.label :league_id %><br>
-    <%= f.text_field :league_id %>
+    <%= f.select :league_id, options_from_collection_for_select(League.all.order('name'), "id", "name", @player.league_id) %>
   </div>
   <div class="field">
     <%= f.label :team_id %><br>
-    <%= f.text_field :team_id %>
+    <%= f.select :team_id, options_from_collection_for_select(Team.all, "id", "full_name", @player.team_id) %>
   </div>
   <div class="field">
     <%= f.label :position_id %><br>
-    <%= f.text_field :position_id %>
-  </div>
-  <div class="field">
-    <%= f.label :ffn_player_id %><br>
-    <%= f.number_field :ffn_player_id %>
-  </div>
-  <div class="field">
-    <%= f.label :college %><br>
-    <%= f.text_field :college %>
+    <%= f.select :position_id, options_from_collection_for_select(Position.all, "id", "name", @player.position_id) %>
   </div>
   <div class="field">
     <%= f.label :first_name %><br>
@@ -58,6 +50,10 @@
   <div class="field">
     <%= f.label :date_of_birth %><br>
     <%= f.text_field :date_of_birth %>
+  </div>
+  <div class="field">
+    <%= f.label :college %><br>
+    <%= f.text_field :college %>
   </div>
   <div class="field">
     <%= f.label :active %><br>

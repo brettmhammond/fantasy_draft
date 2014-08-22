@@ -2,28 +2,19 @@
 
 <p>
   <strong>League:</strong>
-  <%= @player.league %>
+  <%= @player.league.name %>
 </p>
 
 <p>
   <strong>Team:</strong>
-  <%= @player.team %>
+  <%= @player.team.full_name %>
 </p>
 
 <p>
   <strong>Position:</strong>
-  <%= @player.position %>
+  <%= @player.position.name %>
 </p>
 
-<p>
-  <strong>Ffn player:</strong>
-  <%= @player.ffn_player_id %>
-</p>
-
-<p>
-  <strong>College:</strong>
-  <%= @player.college %>
-</p>
 
 <p>
   <strong>First name:</strong>
@@ -64,6 +55,12 @@
   <strong>Active:</strong>
   <%= @player.active %>
 </p>
+
+<p>
+  <strong>College:</strong>
+  <%= @player.college %>
+</p>
+
 
 <%= link_to 'Edit', edit_player_path(@player) %> |
 <%= link_to 'Back', players_path %>

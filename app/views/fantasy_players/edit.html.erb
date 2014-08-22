@@ -1,4 +1,13 @@
-<h1>Editing fantasy_player</h1>
+<h2>Editing Fantasy Draft Pick</h2>
+
+<h4>
+    <%= @fantasy_player.player.name %>
+    <small>
+        [<%= @fantasy_player.player.team.name %>]
+        [<%= @fantasy_player.player.position.name %>]
+    </small>
+</h4>
+<hr />
 
 <%= render 'form' %>
 

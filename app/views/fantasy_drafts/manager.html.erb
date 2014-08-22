@@ -34,6 +34,10 @@
           </div>
         <% end %>
 
+        Can't find the player you are looking for? [<%= link_to 'Add New Player', new_player_path %>]
+
+
+
       <% end %>
     </div>
 
@@ -94,6 +98,7 @@
               <th>Player</th>
               <th>Price Paid</th>
               <th>Team</th>
+              <th>Owner</th>
               <th>Delete</th>
             </tr>
           </thead>
@@ -108,9 +113,14 @@
                    $<%= fantasy_player.price %>
                 </td>
                 <td>
-                   <%= fantasy_player.fantasy_team.owner_and_team %>
+                   <%= fantasy_player.fantasy_team.name %>
                 </td>
                 <td>
+                   <%= fantasy_player.fantasy_team.owner %>
+                </td>
+                <td>
+                   <%= link_to 'Edit Pick', edit_fantasy_league_fantasy_draft_fantasy_player_path(@fantasy_league, @fantasy_draft, fantasy_player), :class => 'btn btn-small' %>
+
                    <%= link_to 'Delete Draft Pick', fantasy_league_fantasy_draft_fantasy_player_path(@fantasy_league, @fantasy_draft, fantasy_player), :class => 'btn btn-small', method: :delete, data: { confirm: 'Are you sure you want to delete this pick?' } %>
                 </td>
               </tr>

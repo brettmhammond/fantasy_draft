@@ -1,9 +1,9 @@
 <div data-role="collapsible">
     <h4><center>Filter By Position</center></h4>
     <p>
-      <a class="ui-btn" href="<%=fantasy_league_fantasy_draft_players_path%>">All</a>
+      <a class="ui-btn" href="<%=fantasy_league_fantasy_draft_cheatsheet_path%>">All</a>
       <% Position.all.each do |position| %>
-        <%= link_to position.name, fantasy_league_fantasy_draft_players_path(:position_id => position.id), :class => 'ui-btn' %>
+        <%= link_to position.name, fantasy_league_fantasy_draft_cheatsheet_path(:position_id => position.id), :class => 'ui-btn' %>
       <% end %>
     </p>
 </div>

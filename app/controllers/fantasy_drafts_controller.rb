@@ -12,7 +12,7 @@ class FantasyDraftsController < ApplicationController
   end
 
 
-  def players
+  def cheatsheet
 
     @fantasy_players = FantasyPlayer.where(fantasy_draft_id: params[:fantasy_draft_id], fantasy_league_id: params[:fantasy_league_id]).order('id DESC')
 
@@ -29,7 +29,7 @@ class FantasyDraftsController < ApplicationController
         @player_ranks = PlayerRank.includes(:player, :team, :position).order('overall_rank ASC')
       end
     end
-    render layout: "players"
+    render layout: "cheatsheet"
   end
 
 
