@@ -130,9 +130,10 @@ body#draft_board_layout{
             border-right: 1px solid #999;
             border-bottom: 1px solid #999;
             height:45px;
+            overflow: hidden;
 
             &:first-child{
-                overflow: hidden;
+
                 line-height: 45px;
                 text-align: center;
                 font-size: 16px;
