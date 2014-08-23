@@ -75,10 +75,18 @@
                         %>
                                     <li class="<%=fantasy_player.player.position.name%>">
                                         <div class="draft_pick_card">
-                                            <span class="label label-info pull-left"><%=fantasy_player.player.position.name%></span>
-                                            <span class="label label-info pull-right">$<%=fantasy_player.price%></span>
-                                            <div class="first_name"><%=fantasy_player.player.first_name%></div>
-                                            <div class="last_name"><%=fantasy_player.player.last_name%></div>
+                                            <span class="label label-info pull-left">
+                                                <%=fantasy_player.player.position.name%>
+                                            </span>
+                                            <span class="label label-info pull-right">
+                                                $<%=fantasy_player.price%>
+                                            </span>
+                                            <div class="first_name">
+                                                <%=truncate(fantasy_player.player.first_name, :length => 10, , :separator => '')%>
+                                            </div>
+                                            <div class="last_name">
+                                                <%=truncate(fantasy_player.player.last_name, :length => 10, :separator => '')%>
+                                            </div>
 
                                         </div>
                                     </li>
